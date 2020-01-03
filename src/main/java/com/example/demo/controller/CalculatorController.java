@@ -8,12 +8,12 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api")
-public class CalulatorController {
+@RequestMapping("/calculator/api")
+public class CalculatorController {
 
     private final CalculatorService calculatorService;
 
-    public CalulatorController(CalculatorService calculatorService) {
+    public CalculatorController(CalculatorService calculatorService) {
         this.calculatorService = calculatorService;
     }
 
