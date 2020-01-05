@@ -2,7 +2,6 @@ package com.example.demo.service;
 
 import com.example.demo.model.Item;
 import com.example.demo.model.Receipt;
-import org.springframework.stereotype.Service;
 
 public class CustomerCheckout {
     private static Receipt receipt;
