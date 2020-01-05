@@ -13,24 +13,21 @@ import org.springframework.web.bind.annotation.*;
 public class CashRegisterController {
     private static CustomerCheckout customerCheckout;
 
-    // @ApiOperation()//(description = This endpoint will get the store name and number.")
     @GetMapping("/customerCheckout/{store}/{number}")
     public void customerCheckout(@ApiParam(required = true) @PathVariable(value = "store") String storeName, @PathVariable(value = "number") String storeNumber) {
         customerCheckout = new CustomerCheckout(storeName, storeNumber);
     }
 
-    //(description = "This endpoint will scan in your items, one by one, based on the JSON request body documented here.")
     @PostMapping("/scanAnItem")
     public void scanAnItem(@ApiParam(required = true) @RequestBody ItemDetails itemDetails) throws IllegalAccessException {
         Item item = new Item(itemDetails.itemPrice, itemDetails.itemDescription);
-        if (itemDetails.amount != 0) {
+        if (itemDetails.amount >= 1) {
             customerCheckout.scanAnItem(item, itemDetails.amount);
         } else {
             customerCheckout.scanAnItem(item);
         }
     }
 
-    //(description = "This endpoint ends the transaction and returns a full receipt.")
     @GetMapping("/endTransaction")
     public Receipt endTransaction() {
         return customerCheckout.endTransaction();
